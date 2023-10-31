@@ -1,0 +1,30 @@
+
+syntax = "proto3";
+
+package chitChat;
+
+option go_package = "grpc/proto";
+
+
+
+service ChatRoom {
+  rpc JoinChat(Client) returns (stream Chat);
+  rpc LeaveChat(Client) returns (Ack);
+  rpc SendMessage(Chat) returns (Ack);
+}
+
+message Client {
+  string name = 1;
+  string port = 2;
+}
+
+message Chat {
+    string time = 1;
+    string message = 2;
+    string name = 3;
+}
+
+message Ack {
+    bool succes = 1;
+}
+
